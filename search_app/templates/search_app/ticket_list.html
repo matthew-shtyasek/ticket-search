@@ -6,6 +6,14 @@
 </head>
 <body>
     <div>
+        <p>Search:</p>
+        <form action="." method="get">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Найти!">
+        </form>
+    </div>
+    <div>
         <ul>
             {% for ticket in tickets %}
                 <li>
