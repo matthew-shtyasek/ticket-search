@@ -14,12 +14,7 @@
         </form>
     </div>
     <div>
-        <ul>
-            {% for ticket in tickets %}
-                <li>
-                    <p>{{ ticket|safe }}</p>
-                </li>
-            {% endfor %}
+        <ul class="ajax-list">
         </ul>
     </div>
 </body>
