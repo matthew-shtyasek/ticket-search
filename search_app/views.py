@@ -10,6 +10,14 @@ class TicketListView(ListView):
     context_object_name = 'tickets'
     template_name = 'search_app/ticket_list.html'
 
+    def get(self, request, *args, **kwargs):
+        if request.is_ajax():
+            return render(request=request,
+                          template_name='search_app/ticket_list_item.html',
+                          context=self.get_context_data(object_list=self.model.objects.all()))
+        else:
+            return super().get(request, *args, **kwargs)
+
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
 

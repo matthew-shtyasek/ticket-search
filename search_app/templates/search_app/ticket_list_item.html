@@ -2,4 +2,8 @@
   <li>
     <p>{{ ticket|safe }}</p>
   </li>
+{% empty %}
+  <li>
+    <p>Ничего не найдено!</p>
+  </li>
 {% endfor %}

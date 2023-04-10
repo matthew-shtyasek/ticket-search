@@ -1,5 +1,5 @@
 function cleanList() {
-    $('ul.ajax-list')[0].remove('li');
+    $('ul.ajax-list li').remove();
 }
 
 (function loadScript() {
@@ -9,7 +9,7 @@ function cleanList() {
             cleanList(); // очистка списка, написали эту функцию выше
 
             $.ajax({
-                url: 'search/tickets/',
+                url: '/search/tickets/',
                 data: $('form').serialize(),
                 success: function (data) {
                     $('ul.ajax-list').append(data);
