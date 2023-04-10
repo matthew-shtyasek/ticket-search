@@ -7,6 +7,7 @@
 
 {% block content %}
     <div>
+        <p>Текущая страница: {{request.path}}</p>
         <p>Search:</p>
         <form action="." method="get">
             {% csrf_token %}
