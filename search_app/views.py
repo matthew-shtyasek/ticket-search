@@ -1,3 +1,5 @@
+from copy import copy
+
 from django.shortcuts import render
 from django.views.generic import ListView
 
@@ -26,16 +28,29 @@ class TicketListView(ListView):
         else:
             form = TicketForm(self.request.GET)
         if form.is_valid():
-            cd = form.cleaned_data
-            cd['departure_date__year'] = cd['departure_date'].year
-            cd['departure_date__month'] = cd['departure_date'].month
-            cd['departure_date__day'] = cd['departure_date'].day
-            cd['arrive_date__year'] = cd['arrive_date'].year
-            cd['arrive_date__month'] = cd['arrive_date'].month
-            cd['arrive_date__day'] = cd['arrive_date'].day
-            del cd['departure_date']
-            del cd['arrive_date']
-            context[self.context_object_name] = Ticket.objects.filter(**cd)
+            cd = copy(form.cleaned_data)
+            for key,value in form.cleaned_data.items():
+                if not value:
+                    del cd[key]
+            try:
+                cd['departure_date__year'] = cd['departure_date'].year
+                cd['departure_date__month'] = cd['departure_date'].month
+                cd['departure_date__day'] = cd['departure_date'].day
+                del cd['departure_date']
+            except:
+                pass
+            try:
+                cd['arrive_date__year'] = cd['arrive_date'].year
+                cd['arrive_date__month'] = cd['arrive_date'].month
+                cd['arrive_date__day'] = cd['arrive_date'].day
+                del cd['arrive_date']
+            except:
+                pass
+
+            if cd:
+                context[self.context_object_name] = Ticket.objects.filter(**cd)
+            else:
+                context[self.context_object_name] = []
             form = TicketForm()
 
         context['form'] = form
