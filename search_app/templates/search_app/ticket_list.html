@@ -1,4 +1,9 @@
 {% extends 'root.html' %}
+{% load static %}
+
+{% block js %}
+    <script src="{% static 'js/ajax_search.js' %}"></script>
+{% endblock %}
 
 {% block content %}
     <div>
@@ -6,12 +11,13 @@
         <form action="." method="get">
             {% csrf_token %}
             {{ form.as_p }}
-            <input type="submit" value="Найти!">
+            <input class="search-btn" type="submit" value="Найти!">
         </form>
     </div>
     <div>
         <ul class="ajax-list">
 
         </ul>
+        <p class="error-message"></p>
     </div>
 {% endblock %}
