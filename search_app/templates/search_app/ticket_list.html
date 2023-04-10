@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'root.html' %}
+
+{% block content %}
     <div>
         <p>Search:</p>
         <form action="." method="get">
@@ -15,7 +11,7 @@
     </div>
     <div>
         <ul class="ajax-list">
+            
         </ul>
     </div>
-</body>
-</html>
+{% endblock %}
